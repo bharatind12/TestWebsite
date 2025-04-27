@@ -15,25 +15,17 @@ const Services = () => {
         'Underwater thickness measurement (UTM)',
       ],
       icon: '🌊',
-      details: `
-Real-Time Visual Inspection: Live HD camera feed for observing submerged parts of bridge pillars.
-
-Structural Condition Assessment: Inspects cracks, surface damage, tilt, or joint displacements.
-
-Scour Monitoring: Observes sediment removal near pillar base due to water flow (scouring).
-
-Marine Growth Observation: Identifies algae, barnacles, or other biological growth on pillars.
-
-Corrosion Observation: Checks for rusting, pitting, and surface degradation on metallic structures.
-
-Measurement Support (Laser + UTM): Measures crack size, scour depth, or metal thickness using laser & ultrasonic tools.
-
-Debris and Obstruction Check: Detects driftwood, cables, or objects lodged around the pillars.
-
-Leak or Seepage Detection (if applicable): Spots leaks or seepage in submerged pipes or joints connected to the structure.
-
-Documentation and Reporting: Generates visual and data-based inspection reports with timestamps and findings.
-      `,
+      details: [
+        { title: 'Real-Time Visual Inspection', description: 'Live HD camera feed for observing submerged parts of bridge pillars.' },
+        { title: 'Structural Condition Assessment', description: 'Inspects cracks, surface damage, tilt, or joint displacements.' },
+        { title: 'Scour Monitoring', description: 'Observes sediment removal near pillar base due to water flow (scouring).' },
+        { title: 'Marine Growth Observation', description: 'Identifies algae, barnacles, or other biological growth on pillars.' },
+        { title: 'Corrosion Observation', description: 'Checks for rusting, pitting, and surface degradation on metallic structures.' },
+        { title: 'Measurement Support (Laser + UTM)', description: 'Measures crack size, scour depth, or metal thickness using laser & ultrasonic tools.' },
+        { title: 'Debris and Obstruction Check', description: 'Detects driftwood, cables, or objects lodged around the pillars.' },
+        { title: 'Leak or Seepage Detection (if applicable)', description: 'Spots leaks or seepage in submerged pipes or joints connected to the structure.' },
+        { title: 'Documentation and Reporting', description: 'Generates visual and data-based inspection reports with timestamps and findings.' },
+      ],
     },
     {
       title: 'Custom ROV Development',
@@ -45,11 +37,13 @@ Documentation and Reporting: Generates visual and data-based inspection reports 
         'Upgradable modular designs',
       ],
       icon: '⚙️',
-      details: `
-We design and build custom underwater remotely operated vehicles (ROVs) suited to your specific needs.
-From payload integration (sonar, sensors, cameras) to specialized propulsion systems and modular designs,
-we offer complete R&D, prototyping, and field deployment solutions for marine robotics.
-      `,
+      details: [
+        { title: 'Custom Design', description: 'We design and build custom underwater remotely operated vehicles (ROVs) suited to your specific needs.' },
+        { title: 'Payload Integration', description: 'Integration of sonars, sensors, cameras and other specialized equipment.' },
+        { title: 'Propulsion Systems', description: 'Specialized propulsion systems designed for your specific underwater environment.' },
+        { title: 'Modular Architecture', description: 'Upgradable modular designs that can adapt to changing requirements.' },
+        { title: 'Complete Solutions', description: 'We offer complete R&D, prototyping, and field deployment solutions for marine robotics.' },
+      ],
     },
     {
       title: 'Embedded Systems & Robotics R&D',
@@ -61,11 +55,13 @@ we offer complete R&D, prototyping, and field deployment solutions for marine ro
         'Prototyping and field testing',
       ],
       icon: '🧪',
-      details: `
-Our expertise in embedded systems enables us to develop tailored hardware-software robotic platforms,
-integrate a wide range of sensors (IMU, sonar, pressure, etc.), build real-time controllers,
-and create smart, data-driven underwater robotics and automation solutions.
-      `,
+      details: [
+        { title: 'Tailored Hardware-Software Platforms', description: 'Our expertise in embedded systems enables us to develop tailored hardware-software robotic platforms.' },
+        { title: 'Sensor Integration', description: 'Integration of a wide range of sensors including IMU, sonar, pressure, and more.' },
+        { title: 'Real-Time Controllers', description: 'Build real-time controllers for precise and responsive operation.' },
+        { title: 'Smart Solutions', description: 'Create smart, data-driven underwater robotics and automation solutions.' },
+        { title: 'IoT Connectivity', description: 'Implement IoT capabilities for remote monitoring and control of robotics systems.' },
+      ],
     },
     {
       title: 'Maintenance & Post-Inspection Support',
@@ -77,11 +73,13 @@ and create smart, data-driven underwater robotics and automation solutions.
         'Post-inspection technical support',
       ],
       icon: '🛠️',
-      details: `
-We provide complete post-inspection support including detailed defect analysis,
-report generation, structural integrity recommendations, corrective maintenance planning,
-and 24x7 technical assistance to ensure the best outcome after underwater inspections.
-      `,
+      details: [
+        { title: 'Detailed Defect Analysis', description: 'We provide complete analysis of detected defects with severity assessment.' },
+        { title: 'Comprehensive Reporting', description: 'Generate detailed reports with visual documentation and data interpretation.' },
+        { title: 'Structural Integrity Recommendations', description: 'Expert recommendations for maintaining structural integrity.' },
+        { title: 'Corrective Maintenance Planning', description: 'Develop actionable plans for corrective maintenance based on inspection findings.' },
+        { title: 'Technical Support', description: '24x7 technical assistance to ensure the best outcome after underwater inspections.' },
+      ],
     },
   ];
 
@@ -183,8 +181,14 @@ and 24x7 technical assistance to ensure the best outcome after underwater inspec
               
               <div className="w-16 h-1 bg-orange-400 mb-6"></div>
               
-              <div className="text-gray-700 whitespace-pre-wrap font-sans text-base leading-relaxed">
-                {selectedService.details}
+              {/* Structured Details Display */}
+              <div className="grid grid-cols-1 gap-4">
+                {selectedService.details.map((detail, idx) => (
+                  <div key={idx} className="bg-gray-50 rounded-lg p-4 border-l-4 border-orange-400 hover:shadow-md transition-shadow">
+                    <h4 className="font-bold text-gray-800 mb-1">{detail.title}</h4>
+                    <p className="text-gray-600">{detail.description}</p>
+                  </div>
+                ))}
               </div>
               
               <div className="mt-8 text-center">
