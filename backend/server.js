@@ -21,6 +21,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 const contactSchema = new mongoose.Schema({
   name: String,
   email: String,
+  mobile: String,
+  subject: String,
   message: String,
   createdAt: { type: Date, default: Date.now },
 });
@@ -39,12 +41,14 @@ const transporter = nodemailer.createTransport({
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, mobile, subject, message } = req.body;
 
     // Save to database
     const contact = new Contact({
       name,
       email,
+      mobile,
+      subject,
       message,
     });
     await contact.save();
@@ -53,10 +57,12 @@ app.post('/api/contact', async (req, res) => {
     await transporter.sendMail({
       from: email,
       to: process.env.EMAIL_USER, // Replace with your company email
-      subject: 'New Contact Form Submission',
+      subject: `New Contact Form Submission: ${subject}`,
       text: `
         Name: ${name}
         Email: ${email}
+        Mobile: ${mobile}
+        Subject: ${subject}
         Message: ${message}
       `,
     });
