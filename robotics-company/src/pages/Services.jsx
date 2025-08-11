@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react'; // for premium looking close icon
+import { X, ChevronRight, Eye, Settings, Cpu, Wrench, ShipIcon } from 'lucide-react';
+import Bridge from '../assets/Bridge.png';
+import Dam from '../assets/Dam.png';
+import Ship from '../assets/Ship.png';
+import UTM from '../assets/UTM.png';
+import Watertank from '../assets/Watertank.png';
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
@@ -8,9 +13,11 @@ const Services = () => {
   const services = [
     {
       title: 'Underwater ROV Inspection Services',
+      description: 'We provide comprehensive underwater inspection services using state-of-the-art ROV technology. Our experienced team conducts detailed visual inspections and measurements of underwater structures without the need for divers, ensuring safety and efficiency.',
       points: [
         {
           title: 'Bridge pillar visual inspection',
+          image: Bridge,
           content: {
             title: 'Bridge Pillar Visual Inspection',
             description: 'We perform detailed visual inspections of underwater bridge pillars using advanced ROV technology.',
@@ -28,6 +35,7 @@ const Services = () => {
         },
         {
           title: 'Water storage tank visual inspection',
+          image: Watertank,
           content: {
             title: 'Water Storage Tank Visual Inspection',
             description: 'We inspect water storage tanks internally using ROVs without the need to drain the tank, saving time and cost.',
@@ -44,6 +52,7 @@ const Services = () => {
         },
         {
           title: 'Ship hull inspection',
+          image: Ship,
           content: {
             title: 'Ship Hull Inspection',
             description: 'We conduct underwater inspections of ship hulls to assess the condition without dry-docking.',
@@ -60,6 +69,7 @@ const Services = () => {
         },
         {
           title: 'Dam structure inspection',
+          image: Dam,
           content: {
             title: 'Dam Structure Inspection',
             description: 'We offer underwater inspections of dam structures to identify potential threats and maintain safety.',
@@ -76,6 +86,7 @@ const Services = () => {
         },
         {
           title: 'Underwater thickness measurement (UTM)',
+          image: UTM,
           content: {
             title: 'Underwater Thickness Measurement (UTM)',
             description: 'We measure the metal thickness of submerged structures to assess their integrity.',
@@ -90,18 +101,9 @@ const Services = () => {
           }
         },
       ],
-      icon: '🌊',
-      details: [
-        { title: 'Real-Time Visual Inspection', description: 'Live HD camera feed for observing submerged parts of bridge pillars.' },
-        { title: 'Structural Condition Assessment', description: 'Inspects cracks, surface damage, tilt, or joint displacements.' },
-        { title: 'Scour Monitoring', description: 'Observes sediment removal near pillar base due to water flow (scouring).' },
-        { title: 'Marine Growth Observation', description: 'Identifies algae, barnacles, or other biological growth on pillars.' },
-        { title: 'Corrosion Observation', description: 'Checks for rusting, pitting, and surface degradation on metallic structures.' },
-        { title: 'Measurement Support (Laser + UTM)', description: 'Measures crack size, scour depth, or metal thickness using laser & ultrasonic tools.' },
-        { title: 'Debris and Obstruction Check', description: 'Detects driftwood, cables, or objects lodged around the pillars.' },
-        { title: 'Leak or Seepage Detection (if applicable)', description: 'Spots leaks or seepage in submerged pipes or joints connected to the structure.' },
-        { title: 'Documentation and Reporting', description: 'Generates visual and data-based inspection reports with timestamps and findings.' },
-      ],
+      icon: Eye,
+      color: 'orange',
+      details: [],
     },
     {
       title: 'Custom ROV Development',
@@ -188,15 +190,10 @@ const Services = () => {
           }
         },
       ],
-      icon: '⚙️',
-      details: [
-        { title: 'Custom Design', description: 'We design and build custom underwater remotely operated vehicles (ROVs) suited to your specific needs.' },
-        { title: 'Payload Integration', description: 'Integration of sonars, sensors, cameras and other specialized equipment.' },
-        { title: 'Propulsion Systems', description: 'Specialized propulsion systems designed for your specific underwater environment.' },
-        { title: 'Modular Architecture', description: 'Upgradable modular designs that can adapt to changing requirements.' },
-        { title: 'Complete Solutions', description: 'We offer complete R&D, prototyping, and field deployment solutions for marine robotics.' },
-      ],
-      comingSoon: true, // Add coming soon property
+      icon: Settings,
+      color: 'orange',
+      details: [],
+      comingSoon: true,
     },
     {
       title: 'Embedded Systems & Robotics R&D',
@@ -283,15 +280,10 @@ const Services = () => {
           }
         },
       ],
-      icon: '🧪',
-      details: [
-        { title: 'Tailored Hardware-Software Platforms', description: 'Our expertise in embedded systems enables us to develop tailored hardware-software robotic platforms.' },
-        { title: 'Sensor Integration', description: 'Integration of a wide range of sensors including IMU, sonar, pressure, and more.' },
-        { title: 'Real-Time Controllers', description: 'Build real-time controllers for precise and responsive operation.' },
-        { title: 'Smart Solutions', description: 'Create smart, data-driven underwater robotics and automation solutions.' },
-        { title: 'IoT Connectivity', description: 'Implement IoT capabilities for remote monitoring and control of robotics systems.' },
-      ],
-      comingSoon: true, // Add coming soon property
+      icon: Cpu,
+      color: 'orange',
+      details: [],
+      comingSoon: true,
     },
     {
       title: 'Maintenance & Post-Inspection Support',
@@ -378,14 +370,9 @@ const Services = () => {
           }
         },
       ],
-      icon: '🛠️',
-      details: [
-        { title: 'Detailed Defect Analysis', description: 'We provide complete analysis of detected defects with severity assessment.' },
-        { title: 'Comprehensive Reporting', description: 'Generate detailed reports with visual documentation and data interpretation.' },
-        { title: 'Structural Integrity Recommendations', description: 'Expert recommendations for maintaining structural integrity.' },
-        { title: 'Corrective Maintenance Planning', description: 'Develop actionable plans for corrective maintenance based on inspection findings.' },
-        { title: 'Technical Support', description: '24x7 technical assistance to ensure the best outcome after underwater inspections.' },
-      ],
+      icon: Wrench,
+      color: 'orange',
+      details: [],
     },
   ];
 
@@ -410,173 +397,246 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Our Services</h1>
-          <p className="text-gray-600 mb-8">Comprehensive robotics solutions tailored to your needs</p>
+    <div className="bg-gradient-to-br from-slate-50 via-orange-50 to-orange-100 min-h-screen">
+      {/* Optimized Hero Section - Matching Contact Page */}
+      <div className="relative bg-gradient-to-r from-orange-900 via-orange-800 to-orange-900 py-12 overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-8 left-8 w-48 h-48 bg-gradient-to-br from-orange-400 to-orange-300 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-8 right-8 w-56 h-56 bg-gradient-to-tl from-orange-400 to-orange-200 rounded-full blur-3xl"></div>
         </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-white via-orange-100 to-orange-200 bg-clip-text text-transparent mb-3">
+            Our Services
+          </h1>
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-orange-300 mx-auto mb-3"></div>
+          <p className="text-lg text-orange-100 max-w-2xl mx-auto leading-relaxed font-medium">
+            Comprehensive underwater robotics solutions designed to meet your specific operational needs with cutting-edge technology.
+          </p>
+        </div>
+      </div>
 
-        {/* Services Grid */}
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 mb-16">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              onClick={() => openModal(service)}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-xl border border-gray-100 transition-all duration-300 p-6 cursor-pointer relative"
-            >
-              {/* Coming Soon Tag */}
-              {service.comingSoon && (
-                <div className="absolute top-0 right-0 bg-orange-500 text-white py-1 px-4 rounded-tr-2xl rounded-bl-lg font-semibold text-sm shadow-md">
-                  Coming Soon
+      {/* Main Content with optimized spacing */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-6 relative z-20">
+        
+        {/* Services Grid - Optimized spacing */}
+        <div className="grid gap-5 lg:grid-cols-2 mb-10">
+          {services.map((service, index) => {
+            const IconComponent = service.icon;
+            
+            return (
+              <div
+                key={index}
+                onClick={() => openModal(service)}
+                className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl border border-slate-200 transition-all duration-500 p-6 cursor-pointer relative overflow-hidden hover:-translate-y-1 hover:shadow-orange-500/25"
+              >
+                {/* Decorative background pattern */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full -translate-y-10 translate-x-10 opacity-30 group-hover:scale-125 transition-transform duration-700"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-orange-100 to-orange-50 rounded-full translate-y-8 -translate-x-8 opacity-20 group-hover:scale-110 transition-transform duration-700"></div>
+
+                {/* Coming Soon Badge */}
+                {service.comingSoon && (
+                  <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-1 px-2.5 rounded-full font-bold text-xs shadow-lg">
+                    Coming Soon
+                  </div>
+                )}
+                
+                {/* Icon and Title */}
+                <div className="flex items-center mb-4 relative z-10">
+                  <div className="bg-gradient-to-br from-orange-100 to-orange-200 text-orange-600 p-2.5 rounded-xl mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <IconComponent className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800 group-hover:text-slate-900 transition-colors leading-tight">
+                      {service.title}
+                    </h3>
+                  </div>
                 </div>
-              )}
-              
-              {/* Icon and Title */}
-              <div className="flex items-center mb-4">
-                <div className="text-4xl bg-orange-50 p-3 rounded-lg text-orange-500 mr-4">
-                  {service.icon}
+
+                {/* Service Description */}
+                {service.description && (
+                  <p className="text-slate-600 mb-3 leading-relaxed font-medium relative z-10 text-sm">
+                    {service.description}
+                  </p>
+                )}
+
+                {/* Service Points - Optimized */}
+                <div className="space-y-2 text-slate-600 mb-4 relative z-10">
+                  {service.points.slice(0, 3).map((point, idx) => (
+                    <div key={idx} className="flex items-start bg-gradient-to-r from-slate-50 to-white rounded-lg p-2.5 border border-slate-100 hover:border-slate-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-2.5 mt-1.5 flex-shrink-0"></div>
+                      <span className="font-medium text-sm leading-tight">{point.title || point}</span>
+                    </div>
+                  ))}
+                  {service.points.length > 3 && (
+                    <div className="flex items-start text-slate-500 bg-gradient-to-r from-slate-50 to-white rounded-lg p-2.5 border border-slate-100">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-slate-300 to-slate-400 rounded-full mr-2.5 mt-1.5 flex-shrink-0"></div>
+                      <span className="font-medium text-sm">+{service.points.length - 3} more specialized services</span>
+                    </div>
+                  )}
                 </div>
-                <h3 className="text-xl font-bold text-gray-800">
-                  {service.title}
-                </h3>
-              </div>
 
-              {/* Separator */}
-              <div className="w-16 h-1 bg-orange-400 mb-4"></div>
+                {/* Enhanced Separator */}
+                <div className="flex justify-center mb-4 relative z-10">
+                  <div className="w-10 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full mx-2 mt-[-3px]"></div>
+                  <div className="w-10 h-0.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full"></div>
+                </div>
 
-              {/* Points */}
-              <ul className="space-y-2 text-gray-600 mb-6">
-                {service.points.map((point, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <span className="text-orange-500 mr-2">•</span>
-                    <span>{point.title || point}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* View More Button */}
-              <div className="mt-4 text-right">
+                {/* View Details Button - Uniform Orange */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     openModal(service);
                   }}
-                  className="inline-flex items-center px-4 py-2 bg-orange-50 text-orange-500 rounded-lg hover:bg-orange-100 transition-colors duration-300 font-medium"
+                  className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full justify-center relative z-10 text-sm"
                 >
-                  View Details
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                  </svg>
+                  Explore Details
+                  <ChevronRight className="w-4 h-4 ml-2" />
                 </button>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Service Modal */}
+        {/* Service Modal - Optimized */}
         {selectedService && !selectedSubpoint && (
           <div
             onClick={closeModal}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full p-8 overflow-y-auto max-h-[90vh] animate-fadeIn"
-              style={{ animation: 'fadeIn 0.3s ease-out' }}
+              className="relative bg-white rounded-2xl shadow-2xl max-w-6xl w-full p-6 overflow-y-auto max-h-[90vh] border border-slate-200 mt-16"
             >
-              {/* Coming Soon Badge in Modal */}
-              {selectedService.comingSoon && (
-                <div className="absolute top-4 left-8 bg-orange-500 text-white py-1 px-4 rounded-lg font-semibold text-sm shadow-md">
-                  Coming Soon
-                </div>
-              )}
-              
               {/* Close Button */}
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 bg-gray-100 rounded-full p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-200"
+                className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-800 transition-all duration-200 shadow-lg z-10"
               >
-                <X size={24} />
+                <X size={16} />
               </button>
 
-              {/* Modal Content */}
-              <div className="flex items-center mb-6">
-                <span className="text-4xl bg-orange-50 p-3 rounded-lg text-orange-500 mr-4">
-                  {selectedService.icon}
-                </span>
-                <h3 className="text-2xl font-bold text-gray-800">
-                  {selectedService.title}
-                </h3>
+              {/* Modal Header */}
+              <div className="flex items-center mb-5">
+                <div className="bg-gradient-to-br from-orange-100 to-orange-200 text-orange-600 p-2.5 rounded-xl mr-3 shadow-lg">
+                  <selectedService.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-800 mb-1">
+                    {selectedService.title}
+                  </h3>
+                  {selectedService.comingSoon && (
+                    <span className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white py-1 px-2.5 rounded-full font-bold text-xs shadow-lg">
+                      Coming Soon
+                    </span>
+                  )}
+                </div>
               </div>
-              
-              <div className="w-16 h-1 bg-orange-400 mb-6"></div>
               
               {/* Service Description */}
               {selectedService.description && (
-                <p className="text-gray-700 mb-6">{selectedService.description}</p>
+                <div className="bg-gradient-to-r from-slate-50 to-orange-50 rounded-xl p-5 mb-6 border border-slate-200">
+                  <p className="text-slate-700 text-base leading-relaxed font-medium">{selectedService.description}</p>
+                </div>
               )}
               
               {/* Coming Soon Message */}
               {selectedService.comingSoon && (
-                <div className="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6 rounded-lg">
-                  <p className="text-orange-700">
+                <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-500 p-4 mb-6 rounded-r-xl shadow-lg">
+                  <h4 className="font-bold text-orange-800 text-base mb-1">🚀 Innovation in Progress</h4>
+                  <p className="text-orange-700 leading-relaxed font-medium text-sm">
                     This service is currently in development and will be available soon. 
                     Please contact us for more information and to discuss your future requirements.
                   </p>
                 </div>
               )}
               
-              {/* Points with clickable behavior for all services */}
-              <div className="mb-8">
-                <h4 className="font-bold text-gray-800 mb-4">Services Offered:</h4>
-                <ul className="space-y-3">
-                  {selectedService.points.map((point, idx) => (
-                    <li 
-                      key={idx} 
-                      onClick={point.content && !selectedService.comingSoon ? (e) => openSubpointModal(e, point) : null}
-                      className={`bg-gray-50 rounded-lg p-4 border-l-4 border-orange-400 hover:shadow-md transition-shadow flex justify-between items-center ${point.content && !selectedService.comingSoon ? 'cursor-pointer' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''}`}
-                    >
-                      <span>{point.title}</span>
-                      {point.content && !selectedService.comingSoon && (
-                        <svg className="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              {/* Structured Details Display */}
-              <div className="grid grid-cols-1 gap-4">
-                {selectedService.details.map((detail, idx) => (
-                  <div key={idx} className={`bg-gray-50 rounded-lg p-4 border-l-4 border-orange-400 hover:shadow-md transition-shadow ${selectedService.comingSoon ? 'opacity-70' : ''}`}>
-                    <h4 className="font-bold text-gray-800 mb-1">{detail.title}</h4>
-                    <p className="text-gray-600">{detail.description}</p>
+              {/* Services Offered - Enhanced with Images for ROV Inspection Services */}
+              <div className="mb-6">
+                <h4 className="text-xl font-bold text-slate-800 mb-4">Services Offered:</h4>
+                
+                {selectedService.title === 'Underwater ROV Inspection Services' ? (
+                  <div className="grid gap-3 lg:grid-cols-2">
+                    {selectedService.points.map((point, idx) => (
+                      <div 
+                        key={idx} 
+                        onClick={point.content && !selectedService.comingSoon ? (e) => openSubpointModal(e, point) : null}
+                        className={`group bg-gradient-to-br from-white to-slate-50 rounded-xl shadow-lg hover:shadow-xl border border-slate-200 overflow-hidden transition-all duration-500 ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-1' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''}`}
+                      >
+                        {/* Image Container */}
+                        <div className="relative aspect-[16/9] w-full overflow-hidden">
+                          <img src={point.image} alt={point.title} className="w-full h-full object-cover" />
+                          <div className="absolute top-2 left-2 w-1.5 h-1.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-lg"></div>
+                        </div>
+                        
+                        {/* Content */}
+                        <div className="p-3">
+                          <div className="flex justify-between items-start mb-1">
+                            <h5 className="text-sm font-bold text-slate-800 group-hover:text-slate-900 transition-colors leading-tight">
+                              {point.title}
+                            </h5>
+                            {point.content && !selectedService.comingSoon && (
+                              <div className="w-5 h-5 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-orange-100 group-hover:to-orange-200 rounded-full flex items-center justify-center transition-colors duration-300 flex-shrink-0 ml-2">
+                                <ChevronRight className="w-3 h-3 text-slate-600 group-hover:text-orange-600 transition-colors" />
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Quick preview of service benefits */}
+                          <div className="space-y-0.5">
+                            <div className="flex items-center text-xs text-slate-600">
+                              <div className="w-1 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-1.5 flex-shrink-0"></div>
+                              <span className="font-medium">High-precision inspection</span>
+                            </div>
+                            <div className="flex items-center text-xs text-slate-600">
+                              <div className="w-1 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-1.5 flex-shrink-0"></div>
+                              <span className="font-medium">Advanced ROV technology</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {selectedService.points.map((point, idx) => (
+                      <div 
+                        key={idx} 
+                        onClick={point.content && !selectedService.comingSoon ? (e) => openSubpointModal(e, point) : null}
+                        className={`bg-gradient-to-r from-slate-50 to-white rounded-xl p-3 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300 flex justify-between items-center ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-1' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''} shadow-sm`}
+                      >
+                        <span className="font-bold text-slate-800 text-sm">{point.title}</span>
+                        {point.content && !selectedService.comingSoon && (
+                          <div className="w-6 h-6 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full flex items-center justify-center">
+                            <ChevronRight className="w-3 h-3 text-slate-600" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               
-              {/* Modified CTA for Coming Soon Services */}
+              {/* CTA for Coming Soon Services */}
               {selectedService.comingSoon && (
-                <div className="mt-8 bg-gray-50 p-4 rounded-lg border border-orange-200">
-                  <h4 className="font-bold text-gray-800 mb-2">Want to be notified when this service launches?</h4>
-                  <p className="text-gray-600 mb-4">Leave your contact information and we'll keep you updated on our progress.</p>
+                <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-xl border border-orange-200 mb-4 shadow-lg">
+                  <h4 className="font-bold text-orange-800 mb-1 text-base">Want to be notified when this service launches?</h4>
+                  <p className="text-orange-700 mb-3 leading-relaxed font-medium text-sm">Leave your contact information and we'll keep you updated on our progress.</p>
                   <button
                     onClick={closeModal}
-                    className="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm"
                   >
                     Register Interest
                   </button>
                 </div>
               )}
               
-              <div className="mt-8 text-center">
+              <div className="text-center">
                 <button
                   onClick={closeModal}
-                  className="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                  className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg text-sm"
                 >
                   Close
                 </button>
@@ -585,69 +645,92 @@ const Services = () => {
           </div>
         )}
 
-        {/* Subpoint Modal */}
+        {/* Subpoint Modal - Enhanced with Icons */}
         {selectedSubpoint && (
           <div
             onClick={closeModal}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 overflow-y-auto max-h-[90vh] animate-fadeIn"
-              style={{ animation: 'fadeIn 0.3s ease-out' }}
+              className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full p-6 overflow-y-auto max-h-[90vh] border border-slate-200 mt-16"
             >
               {/* Close Button */}
               <button
                 onClick={closeSubpointModal}
-                className="absolute top-4 right-4 bg-gray-100 rounded-full p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-200 transition-colors duration-200"
+                className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-800 transition-all duration-200 shadow-lg z-10"
               >
-                <X size={24} />
+                <X size={16} />
               </button>
 
+              {/* Hero Image Section */}
+              {selectedSubpoint.image ? (
+                <div className="relative aspect-[16/9] w-full mb-5 rounded-xl overflow-hidden shadow-lg">
+                  <img src={selectedSubpoint.image} alt={selectedSubpoint.content.title} className="w-full h-full object-cover" />
+                </div>
+              ) : (
+                <div className="relative h-36 mb-5 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
+                  <div className="w-full h-full flex flex-col items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-2">
+                      <Eye className="w-6 h-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-700">{selectedSubpoint.content.title}</h3>
+                    <div className="w-12 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full mt-1"></div>
+                  </div>
+                </div>
+              )}
+
               {/* Modal Content */}
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  {selectedSubpoint.content.title}
-                </h3>
-                <div className="w-16 h-1 bg-orange-400 mb-6"></div>
+              <div className="mb-5">
+                {selectedSubpoint.image && (
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">
+                    {selectedSubpoint.content.title}
+                  </h3>
+                )}
                 
-                <p className="text-gray-700 mb-6">
-                  {selectedSubpoint.content.description}
-                </p>
+                <div className="bg-gradient-to-r from-slate-50 to-orange-50 rounded-xl p-4 mb-6 border border-slate-200">
+                  <p className="text-slate-700 text-base leading-relaxed font-medium">
+                    {selectedSubpoint.content.description}
+                  </p>
+                </div>
                 
                 {selectedSubpoint.content.process && selectedSubpoint.content.process.length > 0 && (
                   <div className="mb-6">
-                    <h4 className="font-bold text-gray-800 mb-3">Process:</h4>
-                    <ul className="space-y-2 bg-gray-50 rounded-lg p-4">
+                    <h4 className="text-lg font-bold text-slate-800 mb-3">Our Process:</h4>
+                    <div className="space-y-2">
                       {selectedSubpoint.content.process.map((item, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-orange-500 mr-2">•</span>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
+                        <div key={idx} className="flex items-start bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300">
+                          <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mr-2.5 mt-0.5 flex-shrink-0 shadow-lg">
+                            {idx + 1}
+                          </div>
+                          <span className="text-slate-700 font-medium leading-relaxed text-sm">{item}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
                 
                 {selectedSubpoint.content.importance && selectedSubpoint.content.importance.length > 0 && (
-                  <div>
-                    <h4 className="font-bold text-gray-800 mb-3">Importance:</h4>
-                    <ul className="space-y-2 bg-gray-50 rounded-lg p-4">
+                  <div className="mb-6">
+                    <h4 className="text-lg font-bold text-slate-800 mb-3">Why It's Important:</h4>
+                    <div className="space-y-2">
                       {selectedSubpoint.content.importance.map((item, idx) => (
-                        <li key={idx} className="flex items-start">
-                          <span className="text-orange-500 mr-2">•</span>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
+                        <div key={idx} className="flex items-start bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300">
+                          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2.5 mt-0.5 flex-shrink-0 shadow-lg">
+                            <span className="text-xs">✓</span>
+                          </div>
+                          <span className="text-slate-700 font-medium leading-relaxed text-sm">{item}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </div>
               
-              <div className="mt-8 text-center">
+              <div className="text-center">
                 <button
                   onClick={closeSubpointModal}
-                  className="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg text-sm"
                 >
                   Back to Services
                 </button>
@@ -656,23 +739,27 @@ const Services = () => {
           </div>
         )}
 
-        {/* CTA */}
-        <div className="mt-12 text-center bg-white shadow-xl rounded-2xl p-10">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Ready to automate your business?
-          </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Contact us today to discuss how we can help transform your operations with our state-of-the-art robotics solutions.
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center px-8 py-3 bg-orange-400 hover:bg-orange-500 text-white font-semibold rounded-lg transition duration-300 shadow-md hover:shadow-lg transform hover:translate-y-1"
-          >
-            Get in Touch
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
+        {/* Enhanced CTA Section - Matching Contact Page */}
+        <div className="mt-10 bg-gradient-to-r from-white via-orange-50 to-orange-100 rounded-2xl shadow-xl p-8 border border-slate-200 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-200 to-orange-100 rounded-full -translate-y-12 translate-x-12 opacity-20"></div>
+          
+          <div className="relative z-10 text-center">
+            <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-800 to-orange-800 bg-clip-text text-transparent mb-3">
+              Ready to Transform Your Operations?
+            </h3>
+            <p className="text-base lg:text-lg text-slate-600 mb-5 max-w-2xl mx-auto">
+              Contact us today to discuss how our cutting-edge underwater robotics solutions can revolutionize your operational efficiency.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
+                Get Started Today
+                <ChevronRight className="w-4 h-4 ml-2" />
+              </button>
+              <button className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-800 font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border border-slate-300">
+                Schedule Consultation
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

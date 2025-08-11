@@ -1,60 +1,104 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import pranav from '../assets/pranav.jpeg';
 import bharat from '../assets/bharat.jpeg';
-
 const Team = () => {
+  // Using placeholder images since we can't access the actual image imports
   const teamMembers = [
     {
       name: 'Bharat Manohar Khanvilkar',
-      role: 'Director - Underwater Operations',
+      role: 'Underwater Operations',
       description: 'Electronics and Telecommunication Engineering graduate with hands-on experience in robotics, underwater ROV systems for inspection services, and Research & Development in underwater technologies.',
       image: bharat,
+      additionalTitle: 'Managing Director',
     },
     {
       name: 'Pranav Bhaskar Kulkarni',
-      role: 'Director - Software & Data Systems',
+      role: 'Software & Data Systems',
       description: 'Computer Science Engineering graduate with specialization in Data Analytics (C-DAC), overseeing software, automation, and data operations.',
       image: pranav,
+      additionalTitle: 'Operations Director',
     },
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Meet Our Team</h1>
-          <p className="text-gray-600 mb-8">Technical leaders driving innovation at Praxora Robotics Pvt Ltd</p>
+    <div className="bg-gradient-to-br from-slate-50 via-orange-50 to-orange-100 min-h-screen">
+      {/* Enhanced Hero Section matching contact page */}
+      <div className="relative bg-gradient-to-r from-orange-900 via-orange-800 to-orange-900 py-16 overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-br from-orange-400 to-orange-300 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-tl from-orange-400 to-orange-200 rounded-full blur-3xl"></div>
         </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-white via-orange-100 to-orange-200 bg-clip-text text-transparent mb-4">
+            Leadership Team
+          </h1>
+          <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-orange-300 mx-auto mb-4"></div>
+          <p className="text-lg text-orange-100 max-w-2xl mx-auto leading-relaxed font-medium">
+            The visionary minds driving innovation at Praxora Robotics Pvt Ltd
+          </p>
+        </div>
+      </div>
 
-        {/* Team Members Grid */}
-        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 mb-16">
+      {/* Main Content with overlap effect */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
+        {/* Team Members Grid - Optimized spacing */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="group bg-white rounded-2xl shadow-lg hover:shadow-xl border border-gray-100 transition-all duration-300 p-6"
+              className="group bg-white rounded-2xl shadow-xl p-8 border border-slate-200 hover:border-orange-200 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden"
             >
-              <div className="flex flex-col items-center">
-                {/* Member Image */}
-                <div className="mb-6">
+              {/* Decorative gradient overlay matching contact page style */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full -translate-y-12 translate-x-12 opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-orange-100 to-orange-50 rounded-full translate-y-10 -translate-x-10 opacity-30 group-hover:opacity-40 transition-opacity duration-500"></div>
+              
+              <div className="flex flex-col items-center relative z-10">
+                {/* Optimized Member Image */}
+                <div className="mb-5 relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
                   <img
-                    className="h-48 w-48 object-cover rounded-full border-4 border-orange-50"
+                    className="h-36 w-36 object-cover rounded-full border-4 border-white shadow-lg relative z-10 group-hover:scale-105 transition-transform duration-300"
                     src={member.image}
                     alt={member.name}
                   />
                 </div>
                 
-                {/* Member Details */}
+                {/* Co-founder Badge with consistent orange styling */}
+                <div className="mb-3">
+                  <span className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white py-1.5 px-3 rounded-full text-xs font-bold shadow-md tracking-wider uppercase">
+                    Co-founder
+                  </span>
+                </div>
+                
+                {/* Optimized Member Details */}
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-800">
+                  <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-slate-900 transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-orange-500 font-medium mt-2">{member.role}</p>
                   
-                  {/* Separator */}
-                  <div className="w-16 h-1 bg-orange-400 mx-auto my-4"></div>
+                  {/* Additional Title with consistent styling */}
+                  <div className="mb-2">
+                    <span className="inline-block bg-gradient-to-r from-slate-100 to-orange-50 text-slate-800 font-semibold text-sm px-3 py-1 rounded-lg border border-slate-200">
+                      {member.additionalTitle}
+                    </span>
+                  </div>
                   
-                  <p className="text-gray-600 mt-4">
+                  {/* Role with orange gradient */}
+                  <p className="text-transparent bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text font-semibold text-sm mb-3">
+                    {member.role}
+                  </p>
+                  
+                  {/* Optimized Separator */}
+                  <div className="flex justify-center mb-3">
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
+                    <div className="w-1 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mx-2 mt-[-1px]"></div>
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full"></div>
+                  </div>
+                  
+                  <p className="text-slate-600 leading-relaxed text-sm font-medium">
                     {member.description}
                   </p>
                 </div>
@@ -63,23 +107,25 @@ const Team = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 text-center bg-white shadow-xl rounded-2xl p-10">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Want to join our team?
-          </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals who are passionate about robotics and innovation.
-          </p>
-          <a
-            href="/careers"
-            className="inline-flex items-center px-8 py-3 bg-orange-400 hover:bg-orange-500 text-white font-semibold rounded-lg transition duration-300 shadow-md hover:shadow-lg transform hover:translate-y-1"
-          >
-            View Openings
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
+        {/* Enhanced CTA Section matching contact page */}
+        <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 rounded-2xl shadow-xl p-8 border border-slate-200 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-200 to-orange-100 rounded-full -translate-y-16 translate-x-16 opacity-20"></div>
+          
+          <div className="relative z-10 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-slate-800 to-orange-800 bg-clip-text text-transparent mb-3">
+              Join Our Innovative Team
+            </h3>
+            <p className="text-lg text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
+              We're seeking passionate visionaries who want to revolutionize the future of robotics technology and make a lasting impact.
+            </p>
+            <a
+              href="/careers"
+              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Explore Opportunities
+              <ArrowRight className="ml-2" size={18} />
+            </a>
+          </div>
         </div>
       </div>
     </div>
