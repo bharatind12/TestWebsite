@@ -63,8 +63,8 @@ const Footer = () => {
             </div>
             <div className="space-y-2">
               {[
-                { icon: '📍', text: 'Mazgaon, Murud-Janjira, Raigad, MH-402401' },
-                { icon: '📞', text: '+91 7720885262 • +91 8983301371' },
+                { icon: '📍', text: 'Ganga Acropolis, Mohan Nagar Co-Op Society, Baner, Pune (MH) - 411021' },
+                { icon: '📞', text: '+91 9325051772' },
                 { icon: '✉️', text: 'praxorarobotics@gmail.com', link: 'mailto:praxorarobotics@gmail.com' }
               ].map((item, i) => (
                 <div key={i} className="group flex items-center p-2 bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-lg border border-slate-700/50 hover:border-orange-400/30 transition-all duration-300 hover:shadow-lg hover:shadow-orange-400/10">

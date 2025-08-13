@@ -39,7 +39,7 @@ const Contact = () => {
       type: "Head Office",
       location: "Mazgaon, Murud-Janjira",
       address: "Dist-Raigarh (MH) - 402401",
-      phone: "+91 8983301371",
+      phone: "+91 9325051772",
       email: "praxorarobotics@gmail.com",
       specialty: "R&D Project inquiries",
       gradient: "from-orange-500 to-orange-600"
@@ -48,7 +48,7 @@ const Contact = () => {
       type: "Pune Branch",
       location: "Ganga Acropolis, Mohan Nagar Co-Op Society",
       address: "Baner, Pune (MH) - 411021",
-      phone: "+91 7720885262",
+      phone: "+91 9325051772",
       email: "praxorarobotics@gmail.com",
       specialty: "Service and Job inquiries",
       gradient: "from-orange-500 to-orange-600"
@@ -58,19 +58,19 @@ const Contact = () => {
   const socialLinks = [
     { 
       icon: Instagram, 
-      url: "https://www.instagram.com/", 
+      url: "https://www.instagram.com/praxorarobitics?igsh=MXVtbmltNnZmeTllZQ==", 
       color: "from-pink-500 to-purple-600",
       name: "Instagram"
     },
     { 
       icon: Linkedin, 
-      url: "https://www.linkedin.com/", 
+      url: "https://www.linkedin.com/in/praxora-robotics-95b55937a/", 
       color: "from-blue-600 to-blue-700",
       name: "LinkedIn"
     },
     { 
       icon: MessageCircle, 
-      url: "https://wa.me/917720885262", 
+      url: "https://wa.me/qr/QZZTKJFPBCECF1", 
       color: "from-green-500 to-green-600",
       name: "WhatsApp"
     },
@@ -378,7 +378,7 @@ const Contact = () => {
                 Call Head Office
               </a>
               <a
-                href="https://wa.me/917720885262"
+                href="https://wa.me/919325051772"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all"

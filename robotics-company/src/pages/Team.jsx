@@ -2,24 +2,39 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import pranav from '../assets/pranav.jpeg';
 import bharat from '../assets/bharat.jpeg';
+
 const Team = () => {
   // Using placeholder images since we can't access the actual image imports
   const teamMembers = [
-    {
-      name: 'Bharat Manohar Khanvilkar',
-      role: 'Underwater Operations',
-      description: 'Electronics and Telecommunication Engineering graduate with hands-on experience in robotics, underwater ROV systems for inspection services, and Research & Development in underwater technologies.',
-      image: bharat,
-      additionalTitle: 'Managing Director',
-    },
+    // {
+    //   name: 'Bharat Manohar Khanvilkar',
+    //  // role: 'Underwater Operations',
+    //  // description: 'Electronics and Telecommunication Engineering graduate with hands-on experience in robotics, underwater ROV systems for inspection services, and Research & Development in underwater technologies.',
+    //   image: bharat,
+    //   additionalTitle: 'Managing Director',
+    // },
     {
       name: 'Pranav Bhaskar Kulkarni',
-      role: 'Software & Data Systems',
-      description: 'Computer Science Engineering graduate with specialization in Data Analytics (C-DAC), overseeing software, automation, and data operations.',
+     // role: 'Software & Data Systems',
+      //description: 'Computer Science Engineering graduate with specialization in Data Analytics (C-DAC), overseeing software, automation, and data operations.',
       image: pranav,
       additionalTitle: 'Operations Director',
     },
   ];
+
+  // Dynamic grid class based on number of team members
+  const getGridClass = () => {
+    const memberCount = teamMembers.length;
+    if (memberCount === 1) {
+      return "grid grid-cols-1 gap-8 mb-10 justify-items-center max-w-lg mx-auto";
+    } else if (memberCount === 2) {
+      return "grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10";
+    } else if (memberCount === 3) {
+      return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10";
+    } else {
+      return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-10";
+    }
+  };
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-orange-50 to-orange-100 min-h-screen">
@@ -44,8 +59,8 @@ const Team = () => {
 
       {/* Main Content with overlap effect */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-8 relative z-20">
-        {/* Team Members Grid - Optimized spacing */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        {/* Team Members Grid - Auto-adjustable spacing */}
+        <div className={getGridClass()}>
           {teamMembers.map((member, index) => (
             <div
               key={index}
@@ -87,9 +102,9 @@ const Team = () => {
                   </div>
                   
                   {/* Role with orange gradient */}
-                  <p className="text-transparent bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text font-semibold text-sm mb-3">
+                  {/* <p className="text-transparent bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text font-semibold text-sm mb-3">
                     {member.role}
-                  </p>
+                  </p> */}
                   
                   {/* Optimized Separator */}
                   <div className="flex justify-center mb-3">
@@ -98,9 +113,9 @@ const Team = () => {
                     <div className="w-8 h-0.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full"></div>
                   </div>
                   
-                  <p className="text-slate-600 leading-relaxed text-sm font-medium">
+                  {/* <p className="text-slate-600 leading-relaxed text-sm font-medium">
                     {member.description}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
