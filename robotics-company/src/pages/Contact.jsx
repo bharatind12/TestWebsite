@@ -19,7 +19,7 @@ const Contact = () => {
     try {
       // Simulating API call
       //await axios.post("http://localhost:5000/api/contact", formData);
-      await axios.post("https://my-backend-v0xm.onrender.com/", formData);
+      await axios.post("https://my-backend-v0xm.onrender.com/api/contact", formData);
       setStatus("success");
       setFormData({ name: "", email: "", mobile: "", subject: "", message: "" });
     } catch (error) {
