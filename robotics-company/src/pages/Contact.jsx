@@ -58,7 +58,7 @@ const Contact = () => {
   const socialLinks = [
     { 
       icon: Instagram, 
-      url: "https://www.instagram.com/praxorarobitics?igsh=MXVtbmltNnZmeTllZQ==", 
+      url: "https://www.instagram.com/praxorarobotics?igsh=MXVtbmltNnZmeTllZQ==", 
       color: "from-pink-500 to-purple-600",
       name: "Instagram"
     },
