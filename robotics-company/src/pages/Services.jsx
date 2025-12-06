@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { X, ChevronRight, Eye, Settings, Cpu, Wrench, ShipIcon } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import { X, ChevronRight, Eye, Settings, Cpu, Wrench, ArrowRight } from 'lucide-react';
 import Bridge from '../assets/Bridge.png';
 import Dam from '../assets/Dam.png';
 import Ship from '../assets/Ship.png';
@@ -9,6 +10,13 @@ import Watertank from '../assets/Watertank.png';
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [selectedSubpoint, setSelectedSubpoint] = useState(null);
+  
+  // ROV State
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHoveringHero, setIsHoveringHero] = useState(false);
+  const heroRef = useRef(null);
+
+  const location = useLocation();
 
   const services = [
     {
@@ -102,7 +110,7 @@ const Services = () => {
         },
       ],
       icon: Eye,
-      color: 'orange',
+      color: 'cyan',
       details: [],
     },
     {
@@ -191,7 +199,7 @@ const Services = () => {
         },
       ],
       icon: Settings,
-      color: 'orange',
+      color: 'cyan',
       details: [],
       comingSoon: true,
     },
@@ -281,7 +289,7 @@ const Services = () => {
         },
       ],
       icon: Cpu,
-      color: 'orange',
+      color: 'cyan',
       details: [],
       comingSoon: true,
     },
@@ -371,10 +379,33 @@ const Services = () => {
         },
       ],
       icon: Wrench,
-      color: 'orange',
+      color: 'cyan',
       details: [],
     },
   ];
+
+  // Handle ROV Mouse Move
+  const handleMouseMove = (e) => {
+    if (heroRef.current) {
+      const rect = heroRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+    }
+  };
+
+  // Auto-open modal logic
+  useEffect(() => {
+    if (location.state && location.state.serviceTitle) {
+      const targetService = services.find(s => s.title === location.state.serviceTitle);
+      if (targetService) {
+        setSelectedService(targetService);
+        setSelectedSubpoint(null);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   const openModal = (service) => {
     setSelectedService(service);
@@ -397,30 +428,124 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-orange-50 to-orange-100 min-h-screen">
-      {/* Optimized Hero Section - Matching Contact Page */}
-      <div className="relative bg-gradient-to-r from-orange-900 via-orange-800 to-orange-900 py-12 overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-8 left-8 w-48 h-48 bg-gradient-to-br from-orange-400 to-orange-300 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-8 right-8 w-56 h-56 bg-gradient-to-tl from-orange-400 to-orange-200 rounded-full blur-3xl"></div>
+    <div className="bg-white min-h-screen">
+      {/* 
+         REALISTIC DEEP OCEAN HERO 
+         (Consistent with Team/Products/Contact)
+      */}
+      <div 
+        ref={heroRef}
+        className={`relative bg-[radial-gradient(circle_at_top,_#006994_0%,_#004e70_40%,_#002845_100%)] py-10 overflow-hidden transition-cursor duration-300 ${isHoveringHero ? 'cursor-none' : ''}`}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHoveringHero(true)}
+        onMouseLeave={() => setIsHoveringHero(false)}
+      >
+        {/* 1. ATMOSPHERIC LAYERS */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-cyan-400/20 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 mix-blend-overlay opacity-40 pointer-events-none">
+            <div className="caustic-overlay"></div>
         </div>
-        
+        <div className="absolute inset-0 pointer-events-none opacity-60">
+            <div className="marine-snow"></div>
+        </div>
+
+        {/* 2. ORGANIC AQUATIC LIFE */}
+        <div className="absolute top-1/4 left-[15%] opacity-80 animate-float-jellyfish pointer-events-none mix-blend-screen">
+            <svg width="120" height="160" viewBox="0 0 100 140" fill="none">
+                <path d="M10 40 C 10 15, 30 0, 50 0 C 70 0, 90 15, 90 40 C 90 55, 70 50, 50 50 C 30 50, 10 55, 10 40 Z" 
+                      fill="url(#jellyGradient)" stroke="rgba(200, 240, 255, 0.4)" strokeWidth="0.5"/>
+                <ellipse cx="50" cy="35" rx="20" ry="10" fill="rgba(255, 100, 255, 0.2)" filter="url(#glow)"/>
+                <path d="M30 50 Q 25 70, 30 90 T 30 130" stroke="rgba(255, 200, 255, 0.5)" strokeWidth="1" fill="none" className="tentacle t1"/>
+                <path d="M40 50 Q 35 70, 40 90 T 40 130" stroke="rgba(255, 200, 255, 0.6)" strokeWidth="1.5" fill="none" className="tentacle t2"/>
+                <path d="M50 50 Q 45 70, 50 90 T 50 135" stroke="rgba(255, 200, 255, 0.7)" strokeWidth="1.5" fill="none" className="tentacle t3"/>
+                <path d="M60 50 Q 55 70, 60 90 T 60 130" stroke="rgba(255, 200, 255, 0.6)" strokeWidth="1.5" fill="none" className="tentacle t4"/>
+                <path d="M70 50 Q 65 70, 70 90 T 70 130" stroke="rgba(255, 200, 255, 0.5)" strokeWidth="1" fill="none" className="tentacle t5"/>
+                <defs>
+                    <radialGradient id="jellyGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stopColor="rgba(220, 240, 255, 0.4)" />
+                        <stop offset="100%" stopColor="rgba(220, 240, 255, 0.05)" />
+                    </radialGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+        <div className="absolute top-2/3 left-0 w-full h-full pointer-events-none">
+            <div className="absolute top-0 -left-[200px] animate-school-swim opacity-30 mix-blend-multiply">
+                 <svg width="300" height="100" viewBox="0 0 300 100">
+                    <path d="M10,20 Q25,5 50,20 Q60,25 50,30 Q25,45 10,30 L0,35 L0,15 Z" fill="#001529"/>
+                    <path d="M60,40 Q75,25 100,40 Q110,45 100,50 Q75,65 60,50 L50,55 L50,35 Z" fill="#001529"/>
+                    <path d="M30,60 Q45,45 70,60 Q80,65 70,70 Q45,85 30,70 L20,75 L20,55 Z" fill="#001529"/>
+                 </svg>
+            </div>
+        </div>
+
+        {/* 3. BUBBLES */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {[...Array(15)].map((_, i) => (
+                <div key={`bubble-${i}`} className={`natural-bubble bubble-${i + 1}`}></div>
+            ))}
+        </div>
+
+        {/* 4. CONTENT */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-white via-orange-100 to-orange-200 bg-clip-text text-transparent mb-3">
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] tracking-wide">
             Our Services
           </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-orange-300 mx-auto mb-3"></div>
-          <p className="text-lg text-orange-100 max-w-2xl mx-auto leading-relaxed font-medium">
-            Comprehensive underwater robotics solutions designed to meet your specific operational needs with cutting-edge technology.
+          <div className="w-20 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-2 rounded-full shadow-[0_0_15px_rgba(0,255,255,0.4)]"></div>
+          <p className="text-base text-cyan-50 max-w-2xl mx-auto leading-relaxed font-bold drop-shadow-md">
+            Comprehensive underwater robotics solutions designed to meet your specific operational needs.
           </p>
+        </div>
+
+        {/* 5. ROV & VOLUMETRIC LIGHTING */}
+        <div 
+          className="pointer-events-none absolute z-50 transition-transform duration-75 ease-out will-change-transform"
+          style={{
+            transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
+            opacity: isHoveringHero ? 1 : 0,
+            left: 0,
+            top: 0
+          }}
+        >
+          {/* Spotlight */}
+          <div 
+             className="absolute top-1/2 left-8 w-[400px] h-[120px] origin-left -translate-y-1/2 pointer-events-none"
+             style={{
+                clipPath: 'polygon(0% 45%, 100% 0%, 100% 100%, 0% 55%)',
+                background: 'linear-gradient(90deg, rgba(220, 255, 255, 0.4) 0%, rgba(220, 255, 255, 0.1) 60%, transparent 100%)',
+                filter: 'blur(3px)',
+                mixBlendMode: 'overlay',
+             }}
+          >
+             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjAuNSIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')] animate-beam-flow opacity-60"></div>
+          </div>
+
+          {/* ROV Unit */}
+          <div className="absolute -top-8 -left-8 w-16 h-16 filter drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)]">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full animate-hover-float">
+               <rect x="5" y="35" width="8" height="30" rx="1" fill="#1e293b" />
+               <path d="M5 50 L -2 45 M 5 50 L -2 55" stroke="#94a3b8" strokeWidth="2" className="animate-spin-propeller" style={{transformBox: 'fill-box', transformOrigin: '5px 50px'}}/>
+               <path d="M15 45 C 15 30, 25 20, 45 20 L 75 20 C 90 20, 95 30, 95 50 C 95 70, 90 80, 75 80 L 45 80 C 25 80, 15 70, 15 45 Z" 
+                     fill="#F59E0B" stroke="#FCD34D" strokeWidth="1"/>
+               <path d="M15 45 C 15 65, 25 75, 45 75 L 75 75 C 85 75, 90 70, 92 60 L 18 60 C 16 55, 15 50, 15 45 Z" fill="rgba(0,0,0,0.1)"/>
+               <path d="M75 20 C 90 20, 95 30, 95 50 C 95 70, 90 80, 75 80 Z" fill="#06b6d4" fillOpacity="0.4" />
+               <ellipse cx="78" cy="50" rx="6" ry="18" fill="#cffafe" fillOpacity="0.6" filter="url(#glow)" />
+               <rect x="40" y="15" width="10" height="5" fill="#333" />
+               <circle cx="45" cy="15" r="3" fill="#ef4444" className="animate-blink" />
+               <path d="M40 80 L 35 95 H 55 L 50 80" fill="#475569" />
+               <path d="M35 95 L 30 100 M 55 95 L 60 100" stroke="#94a3b8" strokeWidth="2"/>
+            </svg>
+          </div>
         </div>
       </div>
 
-      {/* Main Content with optimized spacing */}
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-6 relative z-20">
         
-        {/* Services Grid - Optimized spacing */}
+        {/* Services Grid - Optimized */}
         <div className="grid gap-5 lg:grid-cols-2 mb-10">
           {services.map((service, index) => {
             const IconComponent = service.icon;
@@ -429,22 +554,22 @@ const Services = () => {
               <div
                 key={index}
                 onClick={() => openModal(service)}
-                className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl border border-slate-200 transition-all duration-500 p-6 cursor-pointer relative overflow-hidden hover:-translate-y-1 hover:shadow-orange-500/25"
+                className="group bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl hover:shadow-2xl border-2 border-blue-100 hover:border-cyan-200 transition-all duration-500 p-6 cursor-pointer relative overflow-hidden hover:-translate-y-1"
               >
-                {/* Decorative background pattern */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full -translate-y-10 translate-x-10 opacity-30 group-hover:scale-125 transition-transform duration-700"></div>
-                <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-orange-100 to-orange-50 rounded-full translate-y-8 -translate-x-8 opacity-20 group-hover:scale-110 transition-transform duration-700"></div>
+                {/* Decorative background */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full -translate-y-10 translate-x-10 opacity-30 group-hover:scale-125 transition-transform duration-700"></div>
+                <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-cyan-100 to-blue-100 rounded-full translate-y-8 -translate-x-8 opacity-20 group-hover:scale-110 transition-transform duration-700"></div>
 
                 {/* Coming Soon Badge */}
                 {service.comingSoon && (
-                  <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white py-1 px-2.5 rounded-full font-bold text-xs shadow-lg">
+                  <div className="absolute top-3 right-3 bg-gradient-to-r from-cyan-600 to-blue-700 text-white py-1 px-2.5 rounded-full font-bold text-xs shadow-lg">
                     Coming Soon
                   </div>
                 )}
                 
                 {/* Icon and Title */}
                 <div className="flex items-center mb-4 relative z-10">
-                  <div className="bg-gradient-to-br from-orange-100 to-orange-200 text-orange-600 p-2.5 rounded-xl mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="bg-gradient-to-br from-cyan-100 to-blue-200 text-cyan-700 p-2.5 rounded-xl mr-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <IconComponent className="w-5 h-5" />
                   </div>
                   <div>
@@ -461,36 +586,23 @@ const Services = () => {
                   </p>
                 )}
 
-                {/* Service Points - Optimized */}
+                {/* Service Points */}
                 <div className="space-y-2 text-slate-600 mb-4 relative z-10">
                   {service.points.slice(0, 3).map((point, idx) => (
-                    <div key={idx} className="flex items-start bg-gradient-to-r from-slate-50 to-white rounded-lg p-2.5 border border-slate-100 hover:border-slate-200 transition-colors">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-2.5 mt-1.5 flex-shrink-0"></div>
+                    <div key={idx} className="flex items-start bg-white rounded-lg p-2.5 border border-blue-100 hover:border-cyan-200 transition-colors">
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full mr-2.5 mt-1.5 flex-shrink-0"></div>
                       <span className="font-medium text-sm leading-tight">{point.title || point}</span>
                     </div>
                   ))}
-                  {service.points.length > 3 && (
-                    <div className="flex items-start text-slate-500 bg-gradient-to-r from-slate-50 to-white rounded-lg p-2.5 border border-slate-100">
-                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-slate-300 to-slate-400 rounded-full mr-2.5 mt-1.5 flex-shrink-0"></div>
-                      <span className="font-medium text-sm">+{service.points.length - 3} more specialized services</span>
-                    </div>
-                  )}
                 </div>
 
-                {/* Enhanced Separator */}
-                <div className="flex justify-center mb-4 relative z-10">
-                  <div className="w-10 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full"></div>
-                  <div className="w-1.5 h-1.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full mx-2 mt-[-3px]"></div>
-                  <div className="w-10 h-0.5 bg-gradient-to-r from-orange-600 to-orange-500 rounded-full"></div>
-                </div>
-
-                {/* View Details Button - Uniform Orange */}
+                {/* View Details Button */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     openModal(service);
                   }}
-                  className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full justify-center relative z-10 text-sm"
+                  className="bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full justify-center relative z-10 text-sm"
                 >
                   Explore Details
                   <ChevronRight className="w-4 h-4 ml-2" />
@@ -500,7 +612,7 @@ const Services = () => {
           })}
         </div>
 
-        {/* Service Modal - Optimized */}
+        {/* Service Modal - OPTIMIZED */}
         {selectedService && !selectedSubpoint && (
           <div
             onClick={closeModal}
@@ -508,108 +620,83 @@ const Services = () => {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-white rounded-2xl shadow-2xl max-w-6xl w-full p-6 overflow-y-auto max-h-[90vh] border border-slate-200 mt-16"
+              className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full p-4 overflow-y-auto max-h-[85vh] border-2 border-blue-200 mt-16"
             >
-              {/* Close Button */}
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-800 transition-all duration-200 shadow-lg z-10"
+                className="absolute top-3 right-3 w-7 h-7 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 transition-all z-10"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
 
-              {/* Modal Header */}
-              <div className="flex items-center mb-5">
-                <div className="bg-gradient-to-br from-orange-100 to-orange-200 text-orange-600 p-2.5 rounded-xl mr-3 shadow-lg">
-                  <selectedService.icon className="w-5 h-5" />
+              <div className="flex items-center mb-3">
+                <div className="bg-gradient-to-br from-cyan-100 to-blue-200 text-cyan-700 p-2 rounded-lg mr-2.5 shadow-lg">
+                  <selectedService.icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-slate-800 mb-1">
+                  <h3 className="text-xl font-bold text-slate-800">
                     {selectedService.title}
                   </h3>
-                  {selectedService.comingSoon && (
-                    <span className="inline-block bg-gradient-to-r from-orange-500 to-orange-600 text-white py-1 px-2.5 rounded-full font-bold text-xs shadow-lg">
-                      Coming Soon
-                    </span>
-                  )}
                 </div>
               </div>
               
-              {/* Service Description */}
               {selectedService.description && (
-                <div className="bg-gradient-to-r from-slate-50 to-orange-50 rounded-xl p-5 mb-6 border border-slate-200">
-                  <p className="text-slate-700 text-base leading-relaxed font-medium">{selectedService.description}</p>
+                <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 mb-4 border border-blue-100">
+                  <p className="text-slate-700 text-sm leading-relaxed font-medium">{selectedService.description}</p>
                 </div>
               )}
               
-              {/* Coming Soon Message */}
+              {/* Coming Soon */}
               {selectedService.comingSoon && (
-                <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-500 p-4 mb-6 rounded-r-xl shadow-lg">
-                  <h4 className="font-bold text-orange-800 text-base mb-1">🚀 Innovation in Progress</h4>
-                  <p className="text-orange-700 leading-relaxed font-medium text-sm">
-                    This service is currently in development and will be available soon. 
-                    Please contact us for more information and to discuss your future requirements.
+                <div className="bg-gradient-to-r from-cyan-50 to-blue-50 border-l-4 border-cyan-500 p-3 mb-4 rounded-r-lg shadow-sm">
+                  <h4 className="font-bold text-cyan-800 text-sm mb-0.5">🚀 Innovation in Progress</h4>
+                  <p className="text-cyan-700 leading-relaxed font-medium text-xs">
+                    This service is currently in development and will be available soon.
                   </p>
                 </div>
               )}
               
-              {/* Services Offered - Enhanced with Images for ROV Inspection Services */}
-              <div className="mb-6">
-                <h4 className="text-xl font-bold text-slate-800 mb-4">Services Offered:</h4>
+              {/* Services Grid in Modal - OPTIMIZED */}
+              <div className="mb-4">
+                <h4 className="text-base font-bold text-slate-800 mb-3">Services Offered:</h4>
                 
                 {selectedService.title === 'Underwater ROV Inspection Services' ? (
-                  <div className="grid gap-3 lg:grid-cols-2">
+                  <div className="grid gap-2.5 lg:grid-cols-2">
                     {selectedService.points.map((point, idx) => (
                       <div 
                         key={idx} 
                         onClick={point.content && !selectedService.comingSoon ? (e) => openSubpointModal(e, point) : null}
-                        className={`group bg-gradient-to-br from-white to-slate-50 rounded-xl shadow-lg hover:shadow-xl border border-slate-200 overflow-hidden transition-all duration-500 ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-1' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''}`}
+                        className={`group bg-gradient-to-br from-white to-slate-50 rounded-lg shadow-md hover:shadow-lg border border-blue-100 overflow-hidden transition-all duration-500 ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-0.5' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''}`}
                       >
-                        {/* Image Container */}
-                        <div className="relative aspect-[16/9] w-full overflow-hidden">
+                        <div className="relative aspect-video w-full overflow-hidden">
                           <img src={point.image} alt={point.title} className="w-full h-full object-cover" />
-                          <div className="absolute top-2 left-2 w-1.5 h-1.5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-lg"></div>
                         </div>
-                        
-                        {/* Content */}
-                        <div className="p-3">
-                          <div className="flex justify-between items-start mb-1">
-                            <h5 className="text-sm font-bold text-slate-800 group-hover:text-slate-900 transition-colors leading-tight">
+                        <div className="p-2">
+                          <div className="flex justify-between items-start">
+                            <h5 className="text-xs font-bold text-slate-800 group-hover:text-cyan-700 transition-colors leading-tight">
                               {point.title}
                             </h5>
                             {point.content && !selectedService.comingSoon && (
-                              <div className="w-5 h-5 bg-gradient-to-br from-slate-100 to-slate-200 group-hover:from-orange-100 group-hover:to-orange-200 rounded-full flex items-center justify-center transition-colors duration-300 flex-shrink-0 ml-2">
-                                <ChevronRight className="w-3 h-3 text-slate-600 group-hover:text-orange-600 transition-colors" />
+                              <div className="w-4 h-4 bg-slate-100 group-hover:bg-cyan-100 rounded-full flex items-center justify-center transition-colors ml-1.5 flex-shrink-0">
+                                <ChevronRight className="w-2.5 h-2.5 text-slate-600 group-hover:text-cyan-700" />
                               </div>
                             )}
-                          </div>
-                          
-                          {/* Quick preview of service benefits */}
-                          <div className="space-y-0.5">
-                            <div className="flex items-center text-xs text-slate-600">
-                              <div className="w-1 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-1.5 flex-shrink-0"></div>
-                              <span className="font-medium">High-precision inspection</span>
-                            </div>
-                            <div className="flex items-center text-xs text-slate-600">
-                              <div className="w-1 h-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-1.5 flex-shrink-0"></div>
-                              <span className="font-medium">Advanced ROV technology</span>
-                            </div>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="grid gap-3 md:grid-cols-2">
+                  <div className="grid gap-2 md:grid-cols-2">
                     {selectedService.points.map((point, idx) => (
                       <div 
                         key={idx} 
                         onClick={point.content && !selectedService.comingSoon ? (e) => openSubpointModal(e, point) : null}
-                        className={`bg-gradient-to-r from-slate-50 to-white rounded-xl p-3 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300 flex justify-between items-center ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-1' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''} shadow-sm`}
+                        className={`bg-white rounded-lg p-2.5 border-l-4 border-cyan-500 border-y border-r border-blue-100 hover:shadow-md transition-all duration-300 flex justify-between items-center ${point.content && !selectedService.comingSoon ? 'cursor-pointer hover:-translate-y-0.5' : ''} ${selectedService.comingSoon ? 'opacity-70' : ''}`}
                       >
-                        <span className="font-bold text-slate-800 text-sm">{point.title}</span>
+                        <span className="font-bold text-slate-800 text-xs leading-tight">{point.title}</span>
                         {point.content && !selectedService.comingSoon && (
-                          <div className="w-6 h-6 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full flex items-center justify-center">
+                          <div className="w-5 h-5 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0 ml-2">
                             <ChevronRight className="w-3 h-3 text-slate-600" />
                           </div>
                         )}
@@ -619,24 +706,10 @@ const Services = () => {
                 )}
               </div>
               
-              {/* CTA for Coming Soon Services */}
-              {selectedService.comingSoon && (
-                <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-xl border border-orange-200 mb-4 shadow-lg">
-                  <h4 className="font-bold text-orange-800 mb-1 text-base">Want to be notified when this service launches?</h4>
-                  <p className="text-orange-700 mb-3 leading-relaxed font-medium text-sm">Leave your contact information and we'll keep you updated on our progress.</p>
-                  <button
-                    onClick={closeModal}
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm"
-                  >
-                    Register Interest
-                  </button>
-                </div>
-              )}
-              
               <div className="text-center">
                 <button
                   onClick={closeModal}
-                  className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg text-sm"
+                  className="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg transition-all shadow-lg text-xs"
                 >
                   Close
                 </button>
@@ -645,7 +718,7 @@ const Services = () => {
           </div>
         )}
 
-        {/* Subpoint Modal - Enhanced with Icons */}
+        {/* Subpoint Modal - OPTIMIZED */}
         {selectedSubpoint && (
           <div
             onClick={closeModal}
@@ -653,73 +726,47 @@ const Services = () => {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full p-6 overflow-y-auto max-h-[90vh] border border-slate-200 mt-16"
+              className="relative bg-white rounded-xl shadow-2xl max-w-2xl w-full p-4 overflow-y-auto max-h-[85vh] border-2 border-blue-200 mt-16"
             >
-              {/* Close Button */}
               <button
                 onClick={closeSubpointModal}
-                className="absolute top-4 right-4 w-8 h-8 bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-800 transition-all duration-200 shadow-lg z-10"
+                className="absolute top-3 right-3 w-7 h-7 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 transition-all z-10"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
 
-              {/* Hero Image Section */}
               {selectedSubpoint.image ? (
-                <div className="relative aspect-[16/9] w-full mb-5 rounded-xl overflow-hidden shadow-lg">
+                <div className="relative aspect-video w-full mb-3 rounded-lg overflow-hidden shadow-lg">
                   <img src={selectedSubpoint.image} alt={selectedSubpoint.content.title} className="w-full h-full object-cover" />
                 </div>
               ) : (
-                <div className="relative h-36 mb-5 rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-slate-100 to-slate-200">
-                  <div className="w-full h-full flex flex-col items-center justify-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-2">
-                      <Eye className="w-6 h-6 text-white" />
+                <div className="relative h-28 mb-3 rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-1.5 mx-auto">
+                      <Eye className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-slate-700">{selectedSubpoint.content.title}</h3>
-                    <div className="w-12 h-1 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full mt-1"></div>
+                    <h3 className="text-base font-bold text-slate-700">{selectedSubpoint.content.title}</h3>
                   </div>
                 </div>
               )}
 
-              {/* Modal Content */}
-              <div className="mb-5">
-                {selectedSubpoint.image && (
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">
-                    {selectedSubpoint.content.title}
-                  </h3>
-                )}
-                
-                <div className="bg-gradient-to-r from-slate-50 to-orange-50 rounded-xl p-4 mb-6 border border-slate-200">
-                  <p className="text-slate-700 text-base leading-relaxed font-medium">
+              <div className="mb-3">
+                <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg p-3 mb-3 border border-blue-100">
+                  <p className="text-slate-700 text-sm leading-relaxed font-medium">
                     {selectedSubpoint.content.description}
                   </p>
                 </div>
                 
-                {selectedSubpoint.content.process && selectedSubpoint.content.process.length > 0 && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-bold text-slate-800 mb-3">Our Process:</h4>
-                    <div className="space-y-2">
+                {selectedSubpoint.content.process && (
+                  <div className="mb-3">
+                    <h4 className="text-sm font-bold text-slate-800 mb-2">Our Process:</h4>
+                    <div className="space-y-1.5">
                       {selectedSubpoint.content.process.map((item, idx) => (
-                        <div key={idx} className="flex items-start bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300">
-                          <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold mr-2.5 mt-0.5 flex-shrink-0 shadow-lg">
+                        <div key={idx} className="flex items-start bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg p-2 shadow-sm">
+                          <div className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold mr-2 mt-0.5 flex-shrink-0">
                             {idx + 1}
                           </div>
-                          <span className="text-slate-700 font-medium leading-relaxed text-sm">{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                {selectedSubpoint.content.importance && selectedSubpoint.content.importance.length > 0 && (
-                  <div className="mb-6">
-                    <h4 className="text-lg font-bold text-slate-800 mb-3">Why It's Important:</h4>
-                    <div className="space-y-2">
-                      {selectedSubpoint.content.importance.map((item, idx) => (
-                        <div key={idx} className="flex items-start bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-3 shadow-sm hover:shadow-lg transition-all duration-300">
-                          <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2.5 mt-0.5 flex-shrink-0 shadow-lg">
-                            <span className="text-xs">✓</span>
-                          </div>
-                          <span className="text-slate-700 font-medium leading-relaxed text-sm">{item}</span>
+                          <span className="text-slate-700 font-medium leading-relaxed text-xs">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -730,7 +777,7 @@ const Services = () => {
               <div className="text-center">
                 <button
                   onClick={closeSubpointModal}
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2 px-5 rounded-lg transition-all duration-300 shadow-lg text-sm"
+                  className="bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-semibold py-2 px-4 rounded-lg transition-all shadow-lg text-xs"
                 >
                   Back to Services
                 </button>
@@ -739,29 +786,138 @@ const Services = () => {
           </div>
         )}
 
-        {/* Enhanced CTA Section - Matching Contact Page */}
-        <div className="mt-10 bg-gradient-to-r from-white via-orange-50 to-orange-100 rounded-2xl shadow-xl p-8 border border-slate-200 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-200 to-orange-100 rounded-full -translate-y-12 translate-x-12 opacity-20"></div>
+        {/* CTA Section */}
+        <div className="mt-10 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-8 border-2 border-blue-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-cyan-200 to-blue-100 rounded-full -translate-y-12 translate-x-12 opacity-20"></div>
           
           <div className="relative z-10 text-center">
-            <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-800 to-orange-800 bg-clip-text text-transparent mb-3">
+            <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-800 to-cyan-800 bg-clip-text text-transparent mb-3">
               Ready to Transform Your Operations?
             </h3>
             <p className="text-base lg:text-lg text-slate-600 mb-5 max-w-2xl mx-auto">
               Contact us today to discuss how our cutting-edge underwater robotics solutions can revolutionize your operational efficiency.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-orange-600 to-orange-700 text-white font-semibold rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
+              <button className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-700 text-white font-semibold rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
                 Get Started Today
-                <ChevronRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-2" />
               </button>
-              <button className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-800 font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border border-slate-300">
+              <button className="inline-flex items-center px-5 py-2.5 bg-white text-slate-800 font-semibold rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-blue-100 hover:border-cyan-200">
                 Schedule Consultation
               </button>
             </div>
           </div>
         </div>
       </div>
+      
+      <style>{`
+        /* 1. Realistic Caustics */
+        .caustic-overlay {
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            background-size: cover;
+            animation: drift-slow 40s linear infinite;
+        }
+        @keyframes drift-slow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -30px); }
+        }
+
+        /* 2. Marine Snow */
+        .marine-snow {
+            background-image: radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: snow-drift 20s linear infinite;
+        }
+        @keyframes snow-drift {
+            from { background-position: 0 0; }
+            to { background-position: 100px 50px; }
+        }
+
+        /* 3. Jellyfish Animation */
+        @keyframes float-jellyfish {
+            0%, 100% { transform: translateY(0) rotate(5deg); }
+            50% { transform: translateY(-25px) rotate(-5deg); }
+        }
+        .tentacle {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 0;
+            animation: wiggle 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+        .t1 { animation-delay: 0s; }
+        .t2 { animation-delay: 0.2s; }
+        .t3 { animation-delay: 0.4s; }
+        .t4 { animation-delay: 0.6s; }
+        .t5 { animation-delay: 0.8s; }
+        
+        @keyframes wiggle {
+            0%, 100% { d: path("M30 50 Q 25 70, 30 90 T 30 130"); }
+            50% { d: path("M30 50 Q 35 70, 30 90 T 35 125"); }
+        }
+
+        /* 4. Fish School Animation */
+        @keyframes school-swim {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(120vw) translateY(-20px); opacity: 0; }
+        }
+        .animate-school-swim {
+            animation: school-swim 30s linear infinite;
+        }
+
+        /* 5. Natural Bubbles */
+        .natural-bubble {
+            position: absolute;
+            bottom: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+            box-shadow: inset 0 0 4px rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        ${[...Array(15)].map((_, i) => `
+            .bubble-${i + 1} {
+                width: ${Math.random() * 8 + 3}px;
+                height: ${Math.random() * 8 + 3}px;
+                left: ${Math.random() * 100}%;
+                animation: bubble-rise ${Math.random() * 4 + 3}s linear infinite;
+                animation-delay: ${Math.random() * 5}s;
+                opacity: ${Math.random() * 0.3 + 0.1};
+            }
+        `).join('')}
+        @keyframes bubble-rise {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-30vh) translateX(10px); }
+            50% { transform: translateY(-60vh) translateX(-10px); }
+            75% { transform: translateY(-90vh) translateX(5px); }
+            100% { transform: translateY(-120vh) translateX(0); opacity: 0; }
+        }
+
+        /* 6. Light Beam Flow */
+        @keyframes beam-flow {
+            from { background-position: 0 0; }
+            to { background-position: 100px 0; }
+        }
+        .animate-beam-flow {
+            animation: beam-flow 2s linear infinite;
+        }
+
+        /* 7. ROV Animations */
+        .animate-spin-propeller {
+            animation: spin 0.2s linear infinite;
+        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .animate-blink { animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { fill: #ef4444; opacity: 1; } 50% { fill: #7f1d1d; opacity: 0.5; } }
+        
+        .animate-hover-float { animation: hover 3s ease-in-out infinite; }
+        @keyframes hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+        .cursor-none { cursor: none; }
+      `}</style>
     </div>
   );
 };
