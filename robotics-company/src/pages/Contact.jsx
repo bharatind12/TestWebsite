@@ -70,7 +70,7 @@ const Contact = () => {
       type: "Head Office",
       location: "Mazgaon, Murud-Janjira",
       address: "Dist-Raigarh (MH) - 402401",
-      phone: "+91 9325051772",
+      phone: "+91 7887889173",
       email: "praxorarobotics@gmail.com",
       specialty: "R&D Project inquiries",
       gradient: "from-cyan-600 to-blue-700"
@@ -79,7 +79,7 @@ const Contact = () => {
       type: "Pune Branch",
       location: "Ganga Acropolis, Mohan Nagar Co-Op Society",
       address: "Baner, Pune (MH) - 411021",
-      phone: "+91 9325051772",
+      phone: "+91 7887889173",
       email: "praxorarobotics@gmail.com",
       specialty: "Service and Job inquiries",
       gradient: "from-cyan-600 to-blue-700"
@@ -473,7 +473,7 @@ const Contact = () => {
                 Call Head Office
               </a>
               <a
-                href="https://wa.me/919325051772"
+                href="https://wa.me/917887889173"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all"

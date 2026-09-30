@@ -114,7 +114,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <span className="text-lg mr-2 opacity-80">📞</span>
-                <p className="text-cyan-100/60 text-xs">+91 9325051772</p>
+                <p className="text-cyan-100/60 text-xs">+91 7887889173</p>
               </div>
               <div className="flex items-center">
                 <span className="text-lg mr-2 opacity-80">✉️</span>
